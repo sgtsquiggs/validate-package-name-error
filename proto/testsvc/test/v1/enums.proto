@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package testsvc.person.v1;
+
+enum PersonType {
+  PERSON_TYPE_INVALID = 0;
+  PERSON_TYPE_ONE = 1;
+  PERSON_TYPE_TWO = 2;
+}
+
+message NestedEnumTestMessage {
+  enum PersonType {
+    PERSON_TYPE_INVALID = 0;
+    PERSON_TYPE_ONE = 1;
+    PERSON_TYPE_TWO = 2;
+  }
+
+  PersonType type = 1;
+}
+
+message GetPersonTypeRequest {
+  int32 person_id = 1;
+}
+
+message GetPersonTypeResponse {
+  PersonType type = 1;
+}
+
+service TestPersonService {
+  rpc GetPerson(GetPersonTypeRequest) returns (GetPersonTypeResponse) {}
+}

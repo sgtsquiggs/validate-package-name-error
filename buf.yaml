@@ -1,0 +1,14 @@
+# This config is only used to specify build options.
+# Lint and breaking change rules are configured separately.
+version: v1beta1
+build:
+  roots:
+    - .
+deps:
+  - buf.build/beta/googleapis
+  - buf.build/beta/protoc-gen-validate
+lint:
+  use:
+    - DEFAULT
+    - UNARY_RPC
+  enum_zero_value_suffix: _INVALID

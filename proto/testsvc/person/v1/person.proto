@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package testsvc.person.v1;
+
+import "validate/validate.proto";
+
+message Person {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message CreatePersonRequest {
+  string name = 1 [(validate.rules).string.min_len = 1];
+  string email = 2 [(validate.rules).string = {ignore_empty: true, email: true}];
+}
+
+message CreatePersonResponse {
+  Person person = 1;
+}
+
+message GetPersonRequest {
+  int32 person_id = 1;
+}
+
+message GetPersonResponse {
+  Person person = 1;
+}
+
+service PersonService {
+  rpc CreatePerson(CreatePersonRequest) returns (CreatePersonResponse) {}
+  rpc GetPerson(GetPersonRequest) returns (GetPersonResponse) {}
+}
